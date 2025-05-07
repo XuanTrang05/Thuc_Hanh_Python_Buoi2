@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web App Xem Giá Vàng, Đô La, Thời Tiết</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Thông Tin Thị Trường</h1>
+
+    <h2>Giá Vàng</h2>
+    <p>Giá vàng hôm nay: {{ gold_price }} USD/ounce</p>
+
+    <h2>Tỷ Giá Đô La</h2>
+    <p>Tỷ giá USD: {{ usd_to_vnd }} VND</p>
+
+    <h2>Thời Tiết</h2>
+    <p>Thành phố: Hà Nội</p>
+    <p>Nhiệt độ: {{ weather_temp }} °C</p>
+    <p>Thời tiết: 
+        {% if weather_code == 0 %}
+            Trời quang
+        {% elif weather_code in [1, 2, 3] %}
+            Trời nhiều mây
+        {% elif weather_code in [45, 48] %}
+            Sương mù
+        {% elif weather_code in [51, 53, 55, 56, 57, 61, 63, 65, 66, 67] %}
+            Mưa
+        {% else %}
+            Không xác định
+        {% endif %}
+    </p>
+
+    <h2>Biểu Đồ Giá Vàng</h2>
+    <img src="{{ url_for('static', filename='gold_chart.png') }}" alt="Biểu đồ giá vàng">
+
+</body>
+</html>
